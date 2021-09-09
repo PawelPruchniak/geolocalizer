@@ -1,0 +1,21 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+#Maven temporary files
+target/
+
+#IntelliJ files
+**/*.iml
+**/.idea
+**/.gradle
+
+#json files
+*.json
+.vs/slnx.sqlite
+
+#Log files
+*.log
