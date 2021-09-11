@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.view.RedirectView;
 import pp.geolocalizer.spring.entity.Device;
-import pp.geolocalizer.spring.exception.RestPreconditions;
+import pp.geolocalizer.spring.exception.DeviceNotFoundException;
 import pp.geolocalizer.spring.service.DeviceService;
 
 import javax.validation.Valid;
@@ -34,11 +34,13 @@ public class DeviceController {
     /**
      * @param aId - Id of getting Device
      * @return obtained Device
-     * @throws NotFoundException when there is no Device with that Id
+     * @throws DeviceNotFoundException when there is no Device with that Id
      */
     @GetMapping(value = "/device/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Device getById( @PathVariable("id") Long aId ) throws NotFoundException {
-        return RestPreconditions.returnIfExists( deviceService.getDeviceById( aId ) );
+    public Device getById( @PathVariable("id") Long aId ) throws DeviceNotFoundException {
+        return deviceService
+                .getDeviceById( aId )
+                .orElseThrow( () -> new DeviceNotFoundException( aId ) );
     }
 
     /**

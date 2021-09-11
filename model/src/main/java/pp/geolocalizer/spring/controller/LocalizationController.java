@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 import pp.geolocalizer.spring.entity.Localization;
-import pp.geolocalizer.spring.exception.RestPreconditions;
+import pp.geolocalizer.spring.exception.LocalizationNotFoundException;
 import pp.geolocalizer.spring.service.LocalizationService;
 
 import javax.validation.Valid;
@@ -40,11 +40,13 @@ public class LocalizationController {
     /**
      * @param aId - Id of getting Localization
      * @return obtained Localization
-     * @throws NotFoundException when there is no Localization with that Id
+     * @throws LocalizationNotFoundException when there is no Localization with that Id
      */
     @GetMapping(value = "/localization/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Localization getById( @PathVariable("id") Long aId ) throws NotFoundException {
-        return RestPreconditions.returnIfExists( localizationService.getLocalizationById( aId ) );
+    public Localization getById( @PathVariable("id") Long aId ) throws LocalizationNotFoundException {
+        return localizationService
+                .getLocalizationById( aId )
+                .orElseThrow( () -> new LocalizationNotFoundException( aId ) );
     }
 
     /**
