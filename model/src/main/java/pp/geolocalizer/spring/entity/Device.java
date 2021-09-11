@@ -17,7 +17,7 @@ public class Device {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "deviceName")
     private String deviceName;
 
     /*** Constructor ***/

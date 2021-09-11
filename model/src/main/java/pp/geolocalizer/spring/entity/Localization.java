@@ -22,8 +22,8 @@ public class Localization {
     private Long id;
 
     @NotNull
-    @Column(name = "latitiude")
-    private Long latitiude;
+    @Column(name = "latitude")
+    private Long latitude;
 
     @NotNull
     @Column(name = "longitude")
@@ -49,12 +49,12 @@ public class Localization {
         id = aId;
     }
 
-    public Long getLatitiude() {
-        return latitiude;
+    public Long getLatitude() {
+        return latitude;
     }
 
-    public void setLatitiude( Long aLatitiude ) {
-        latitiude = aLatitiude;
+    public void setLatitude( Long aLatitude ) {
+        latitude = aLatitude;
     }
 
     public Long getLongitude() {
@@ -91,6 +91,6 @@ public class Localization {
 
     @Override
     public String toString() {
-        return "Localization{" + "id=" + id + ", latitiude=" + latitiude + ", longitude=" + longitude + ", device=" + device + '}';
+        return "Localization{" + "id=" + id + ", latitiude=" + latitude + ", longitude=" + longitude + ", device=" + device + '}';
     }
 }
