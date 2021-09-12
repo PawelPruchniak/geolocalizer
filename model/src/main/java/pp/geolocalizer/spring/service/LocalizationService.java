@@ -1,7 +1,7 @@
 package pp.geolocalizer.spring.service;
 
-import javassist.NotFoundException;
 import pp.geolocalizer.spring.entity.Localization;
+import pp.geolocalizer.spring.exception.LocalizationNotFoundException;
 
 import java.util.Optional;
 
@@ -13,6 +13,6 @@ public interface LocalizationService {
 
     Localization saveLocalization( Localization aLocalization );
 
-    void deleteLocalizationById( Long aId ) throws NotFoundException;
+    void deleteLocalizationById( Long aId ) throws LocalizationNotFoundException;
 
 }

@@ -1,6 +1,5 @@
 package pp.geolocalizer.spring.controller;
 
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -58,10 +57,10 @@ public class DeviceController {
     /**
      * @param aId - Id of deleting Device
      * @return View of all Devices after deleted one
-     * @throws NotFoundException when there is no Device with that Id
+     * @throws DeviceNotFoundException when there is no Device with that Id
      */
     @DeleteMapping(value = "/device/{id}")
-    public RedirectView delete( @PathVariable Long aId ) throws NotFoundException {
+    public RedirectView delete( @PathVariable Long aId ) throws DeviceNotFoundException {
         deviceService.deleteDeviceById( aId );
 
         return new RedirectView( "/api/devices", true );

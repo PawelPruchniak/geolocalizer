@@ -1,6 +1,5 @@
 package pp.geolocalizer.spring.controller;
 
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -64,10 +63,10 @@ public class LocalizationController {
     /**
      * @param aId - Id of deleting Localization
      * @return View of all Localizations after deleted one
-     * @throws NotFoundException when there is no Localization with that Id
+     * @throws LocalizationNotFoundException when there is no Localization with that Id
      */
     @DeleteMapping(value = "/localization/{id}")
-    public RedirectView delete( @PathVariable Long aId ) throws NotFoundException {
+    public RedirectView delete( @PathVariable Long aId ) throws LocalizationNotFoundException {
         localizationService.deleteLocalizationById( aId );
 
         return new RedirectView( "/api/localizations", true );

@@ -1,7 +1,7 @@
 package pp.geolocalizer.spring.service;
 
-import javassist.NotFoundException;
 import pp.geolocalizer.spring.entity.Device;
+import pp.geolocalizer.spring.exception.DeviceNotFoundException;
 
 import java.util.Optional;
 
@@ -13,5 +13,5 @@ public interface DeviceService {
 
     Device saveDevice( Device aDevice );
 
-    void deleteDeviceById( Long aId ) throws NotFoundException;
+    void deleteDeviceById( Long aId ) throws DeviceNotFoundException;
 }

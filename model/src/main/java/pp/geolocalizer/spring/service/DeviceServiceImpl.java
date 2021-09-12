@@ -1,8 +1,8 @@
 package pp.geolocalizer.spring.service;
 
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import pp.geolocalizer.spring.entity.Device;
+import pp.geolocalizer.spring.exception.DeviceNotFoundException;
 import pp.geolocalizer.spring.repository.DeviceRepository;
 
 import java.util.Optional;
@@ -28,12 +28,12 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public void deleteDeviceById( Long aId ) throws NotFoundException {
+    public void deleteDeviceById( Long aId ) throws DeviceNotFoundException {
         if ( ifExists( aId ) ) {
             deviceRepository.deleteById( aId );
         }
         else {
-            throw new NotFoundException( "Device with id=[" + aId + "] do not exists" );
+            throw new DeviceNotFoundException( aId );
         }
     }
 
