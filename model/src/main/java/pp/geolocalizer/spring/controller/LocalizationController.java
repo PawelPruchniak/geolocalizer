@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
+import pp.geolocalizer.spring.converter.LocalizationConverter;
+import pp.geolocalizer.spring.dto.LocalizationDto;
 import pp.geolocalizer.spring.entity.Localization;
 import pp.geolocalizer.spring.exception.LocalizationNotFoundException;
 import pp.geolocalizer.spring.service.LocalizationService;
@@ -27,6 +29,9 @@ public class LocalizationController {
 
     @Autowired
     private LocalizationService localizationService;
+
+    @Autowired
+    private LocalizationConverter localizationConverter;
 
     /**
      * @return List of All Localizations
@@ -49,15 +54,16 @@ public class LocalizationController {
     }
 
     /**
-     * @param aLocalization - creating Localization
+     * @param aLocalizationDto - creating Localization
      * @return http response
      */
     @PostMapping(value = "/localization")
-    public ResponseEntity<Localization> create( @RequestBody @Valid @NotNull Localization aLocalization ) {
-        localizationService.saveLocalization( aLocalization );
+    public ResponseEntity<LocalizationDto> create( @RequestBody @Valid @NotNull LocalizationDto aLocalizationDto ) {
+        Localization localization = localizationConverter.convertToEntity( aLocalizationDto );
+        localizationService.saveLocalization( localization );
         return ResponseEntity
                 .status( HttpStatus.CREATED )
-                .body( aLocalization );
+                .body( aLocalizationDto );
     }
 
     /**
