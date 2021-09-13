@@ -16,6 +16,14 @@ public class LocalizationConverter {
     @Autowired
     private LocalizationService localizationService;
 
+    public LocalizationConverter() {
+    }
+
+    public LocalizationConverter( ModelMapper aModelMapper, LocalizationService aLocalizationService ) {
+        modelMapper = aModelMapper;
+        localizationService = aLocalizationService;
+    }
+
     public Localization convertToEntity( LocalizationDto aLocalizationDto ) {
         Localization localization = modelMapper.map( aLocalizationDto, Localization.class );
 
@@ -24,9 +32,9 @@ public class LocalizationConverter {
                 aLocalizationDto.getId() );
         if ( oldLocalizationOptional.isPresent() ) {
             var oldLocalization = oldLocalizationOptional.get();
-            localization.setId( oldLocalization.getId() );
             localization.setLatitude( oldLocalization.getLatitude() );
             localization.setLongitude( oldLocalization.getLongitude() );
+            localization.setDevice( oldLocalization.getDevice() );
         }
 
         return localization;

@@ -16,6 +16,14 @@ public class DeviceConverter {
     @Autowired
     private DeviceService deviceService;
 
+    public DeviceConverter() {
+    }
+
+    public DeviceConverter( ModelMapper aModelMapper, DeviceService aDeviceService ) {
+        modelMapper = aModelMapper;
+        deviceService = aDeviceService;
+    }
+
     public Device convertToEntity( DeviceDto aDeviceDto ) {
         Device device = modelMapper.map( aDeviceDto, Device.class );
 
@@ -23,7 +31,6 @@ public class DeviceConverter {
         Optional<Device> oldDeviceOptional = deviceService.getDeviceById( aDeviceDto.getId() );
         if ( oldDeviceOptional.isPresent() ) {
             var oldDevice = oldDeviceOptional.get();
-            device.setId( oldDevice.getId() );
             device.setDeviceName( oldDevice.getDeviceName() );
         }
 
