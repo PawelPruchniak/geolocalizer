@@ -21,9 +21,10 @@ class DeviceDtoTest {
 
     @Test
     void shouldCorrectlyConvertDeviceDtoToDeviceEntity() {
-        DeviceDto deviceDto = new DeviceDto();
-        deviceDto.setId( ID );
-        deviceDto.setDeviceName( DEVICE_NAME );
+        DeviceDto deviceDto = new DeviceDto.Builder()
+                .id( ID )
+                .deviceName( DEVICE_NAME )
+                .build();
 
         Device device = modelMapper.map( deviceDto, Device.class );
 
@@ -34,9 +35,10 @@ class DeviceDtoTest {
     @Test
     void shouldCorrectlyConvertDeviceDtoToDeviceEntityUsingConverter() {
         prepareConverterMock();
-        DeviceDto deviceDto = new DeviceDto();
-        deviceDto.setId( ID );
-        deviceDto.setDeviceName( DEVICE_NAME );
+        DeviceDto deviceDto = new DeviceDto.Builder()
+                .id( ID )
+                .deviceName( DEVICE_NAME )
+                .build();
 
         Device device = deviceConverter.convertToEntity( deviceDto );
 
@@ -46,9 +48,10 @@ class DeviceDtoTest {
 
     private void prepareConverterMock() {
         DeviceService deviceService = mock( DeviceService.class );
-        var device = new Device();
-        device.setId( ID );
-        device.setDeviceName( OLD_DEVICE_NAME );
+        var device = new Device.Builder()
+                .id( ID )
+                .deviceName( OLD_DEVICE_NAME )
+                .build();
         when( deviceService.getDeviceById( 1L ) ).thenReturn( Optional.of( device ) );
         deviceConverter = new DeviceConverter( modelMapper, deviceService );
     }

@@ -25,11 +25,12 @@ class LocalizationDtoTest {
 
     @Test
     void shouldCorrectlyConvertLocalizationDtoToLocalizationEntity() {
-        LocalizationDto localizationDto = new LocalizationDto();
-        localizationDto.setId( ID );
-        localizationDto.setLatitude( LATITUDE );
-        localizationDto.setLongitude( LONGITUDE );
-        localizationDto.setDeviceId( DEVICE_ID );
+        LocalizationDto localizationDto = new LocalizationDto.Builder()
+                .id( ID )
+                .latitude( LATITUDE )
+                .longitude( LONGITUDE )
+                .deviceId( DEVICE_ID )
+                .build();
 
         Localization localization = modelMapper.map( localizationDto, Localization.class );
 
@@ -44,10 +45,12 @@ class LocalizationDtoTest {
     @Test
     void shouldCorrectlyConvertLocalizationDtoToLocalizationEntityUsingConverter() {
         prepareConverterMock();
-        LocalizationDto localizationDto = new LocalizationDto();
-        localizationDto.setId( ID );
-        localizationDto.setLatitude( LATITUDE );
-        localizationDto.setLongitude( LONGITUDE );
+        LocalizationDto localizationDto = new LocalizationDto.Builder()
+                .id( ID )
+                .latitude( LATITUDE )
+                .longitude( LONGITUDE )
+                .deviceId( DEVICE_ID )
+                .build();
 
         Localization localization = localizationConverter.convertToEntity( localizationDto );
 
@@ -61,13 +64,16 @@ class LocalizationDtoTest {
 
     private void prepareConverterMock() {
         LocalizationService localizationService = mock( LocalizationService.class );
-        var device = new Device();
-        device.setId( DEVICE_ID );
-        var localization = new Localization();
-        localization.setId( ID );
-        localization.setLatitude( OLD_LATITUDE );
-        localization.setLongitude( OLD_LONGITUDE );
-        localization.setDevice( device );
+        var device = new Device.Builder()
+                .id( DEVICE_ID )
+                .build();
+        var localization = new Localization.Builder()
+                .id( ID )
+                .latitude( OLD_LATITUDE )
+                .longitude( OLD_LONGITUDE )
+                .device( device )
+                .build();
+
         when( localizationService.getLocalizationById( ID ) ).thenReturn( Optional.of( localization ) );
         localizationConverter = new LocalizationConverter( modelMapper, localizationService );
     }

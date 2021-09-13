@@ -93,4 +93,53 @@ public class Localization {
     public String toString() {
         return "Localization{" + "id=" + id + ", latitiude=" + latitude + ", longitude=" + longitude + ", device=" + device + '}';
     }
+
+    /*** Builder ***/
+    public static class Builder {
+        private Long id;
+        private Long latitude;
+        private Long longitude;
+        private Device device;
+
+        public Localization.Builder id( Long aId ) {
+            this.id = aId;
+            return this;
+        }
+
+        public Localization.Builder latitude( Long aLatitude ) {
+            this.latitude = aLatitude;
+            return this;
+        }
+
+        public Localization.Builder longitude( Long aLongitude ) {
+            this.longitude = aLongitude;
+            return this;
+        }
+
+        public Localization.Builder device( Device aDevice ) {
+            this.device = aDevice;
+            return this;
+        }
+
+        public Localization build() {
+            var newLocalization = createInstance();
+            if ( id != null ) {
+                newLocalization.id = id;
+            }
+            if ( latitude != null ) {
+                newLocalization.latitude = latitude;
+            }
+            if ( longitude != null ) {
+                newLocalization.longitude = longitude;
+            }
+            if ( device != null ) {
+                newLocalization.device = device;
+            }
+            return newLocalization;
+        }
+
+        Localization createInstance() {
+            return new Localization();
+        }
+    }
 }

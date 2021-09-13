@@ -62,4 +62,35 @@ public class Device {
     public String toString() {
         return "Device{" + "id=" + id + ", deviceName='" + deviceName + '\'' + '}';
     }
+
+    /*** Builder ***/
+    public static class Builder {
+        private Long id;
+        private String deviceName;
+
+        public Builder id( Long aId ) {
+            this.id = aId;
+            return this;
+        }
+
+        public Builder deviceName( String aDeviceName ) {
+            this.deviceName = aDeviceName;
+            return this;
+        }
+
+        public Device build() {
+            var newDevice = createInstance();
+            if ( id != null ) {
+                newDevice.id = id;
+            }
+            if ( deviceName != null ) {
+                newDevice.deviceName = deviceName;
+            }
+            return newDevice;
+        }
+
+        Device createInstance() {
+            return new Device();
+        }
+    }
 }
