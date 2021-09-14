@@ -1,12 +1,14 @@
 package pp.geolocalizer.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pp.geolocalizer.spring.entity.Device;
 import pp.geolocalizer.spring.exception.DeviceNotFoundException;
 import pp.geolocalizer.spring.repository.DeviceRepository;
 
 import java.util.Optional;
 
+@Service
 public class DeviceServiceImpl implements DeviceService {
 
     @Autowired

@@ -1,12 +1,14 @@
 package pp.geolocalizer.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pp.geolocalizer.spring.entity.Localization;
 import pp.geolocalizer.spring.exception.LocalizationNotFoundException;
 import pp.geolocalizer.spring.repository.LocalizationRepository;
 
 import java.util.Optional;
 
+@Service
 public class LocalizationServiceImpl implements LocalizationService {
 
     @Autowired

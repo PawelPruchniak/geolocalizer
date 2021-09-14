@@ -7,8 +7,8 @@
         <properties>
             <!-- Configuring JDBC properties -->
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost/db;sql.syntax_pgs=true"/>
-            <property name="javax.persistence.jdbc.user" value="user"/>
-            <property name="javax.persistence.jdbc.password" value="]x]dzY>,Nxq4'xTs"/>
+            <property name="javax.persistence.jdbc.user" value="SA"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
 
             <!-- Hibernate properties -->
