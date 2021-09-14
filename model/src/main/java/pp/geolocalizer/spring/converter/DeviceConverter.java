@@ -2,21 +2,25 @@ package pp.geolocalizer.spring.converter;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pp.geolocalizer.spring.dto.DeviceDto;
 import pp.geolocalizer.spring.entity.Device;
 import pp.geolocalizer.spring.service.DeviceService;
 
 import java.util.Optional;
 
+import static pp.geolocalizer.spring.config.ModelMapperConfig.getModelMapper;
+
+@Component
 public class DeviceConverter {
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
     private DeviceService deviceService;
 
     public DeviceConverter() {
+        modelMapper = getModelMapper();
     }
 
     public DeviceConverter( ModelMapper aModelMapper, DeviceService aDeviceService ) {
@@ -36,4 +40,5 @@ public class DeviceConverter {
 
         return device;
     }
+
 }

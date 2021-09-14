@@ -2,21 +2,25 @@ package pp.geolocalizer.spring.converter;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pp.geolocalizer.spring.dto.LocalizationDto;
 import pp.geolocalizer.spring.entity.Localization;
 import pp.geolocalizer.spring.service.LocalizationService;
 
 import java.util.Optional;
 
+import static pp.geolocalizer.spring.config.ModelMapperConfig.getModelMapper;
+
+@Component
 public class LocalizationConverter {
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Autowired
     private LocalizationService localizationService;
 
     public LocalizationConverter() {
+        modelMapper = getModelMapper();
     }
 
     public LocalizationConverter( ModelMapper aModelMapper, LocalizationService aLocalizationService ) {
@@ -39,4 +43,5 @@ public class LocalizationConverter {
 
         return localization;
     }
+
 }
