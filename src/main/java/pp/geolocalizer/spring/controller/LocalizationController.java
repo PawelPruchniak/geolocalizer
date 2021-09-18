@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +18,6 @@ import pp.geolocalizer.spring.entity.Localization;
 import pp.geolocalizer.spring.exception.LocalizationNotFoundException;
 import pp.geolocalizer.spring.service.LocalizationService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class LocalizationController {
@@ -58,7 +53,7 @@ public class LocalizationController {
      * @return http response
      */
     @PostMapping(value = "/localization")
-    public ResponseEntity<LocalizationDto> create( @RequestBody @Valid @NotNull LocalizationDto aLocalizationDto ) {
+    public ResponseEntity<LocalizationDto> create( @RequestBody LocalizationDto aLocalizationDto ) {
         Localization localization = localizationConverter.convertToEntity( aLocalizationDto );
         localizationService.saveLocalization( localization );
         return ResponseEntity

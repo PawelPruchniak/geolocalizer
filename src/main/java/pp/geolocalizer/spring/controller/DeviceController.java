@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 import pp.geolocalizer.spring.converter.DeviceConverter;
 import pp.geolocalizer.spring.dto.DeviceDto;
@@ -16,9 +18,8 @@ import pp.geolocalizer.spring.entity.Device;
 import pp.geolocalizer.spring.exception.DeviceNotFoundException;
 import pp.geolocalizer.spring.service.DeviceService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
+@RestController
+@RequestMapping("/api")
 public class DeviceController {
 
     @Autowired
@@ -52,7 +53,7 @@ public class DeviceController {
      * @return http response
      */
     @PostMapping(value = "/device")
-    public ResponseEntity<DeviceDto> create( @RequestBody @Valid @NotNull DeviceDto aDeviceDto ) {
+    public ResponseEntity<DeviceDto> create( @RequestBody DeviceDto aDeviceDto ) {
         Device device = deviceConverter.convertToEntity( aDeviceDto );
         deviceService.saveDevice( device );
 
