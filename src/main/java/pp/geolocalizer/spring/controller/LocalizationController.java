@@ -67,7 +67,7 @@ public class LocalizationController {
      * @throws LocalizationNotFoundException when there is no Localization with that Id
      */
     @DeleteMapping(value = "/localization/{id}")
-    public RedirectView delete( @PathVariable Long aId ) throws LocalizationNotFoundException {
+    public RedirectView delete( @PathVariable("id") Long aId ) throws LocalizationNotFoundException {
         localizationService.deleteLocalizationById( aId );
 
         return new RedirectView( "/api/localizations", true );

@@ -68,7 +68,7 @@ public class DeviceController {
      * @throws DeviceNotFoundException when there is no Device with that Id
      */
     @DeleteMapping(value = "/device/{id}")
-    public RedirectView delete( @PathVariable Long aId ) throws DeviceNotFoundException {
+    public RedirectView delete( @PathVariable("id") Long aId ) throws DeviceNotFoundException {
         deviceService.deleteDeviceById( aId );
 
         return new RedirectView( "/api/devices", true );
